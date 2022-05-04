@@ -20,10 +20,10 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide() // скрыть экшенбар
         setWindow()
 
-        val fragmentList = FragmentList()
+        val fragmentTabViewPager2 = FragmentPlayers()
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.llFragList, fragmentList)
+        fragmentTransaction.add(R.id.llFragViewPager2, fragmentTabViewPager2)
         fragmentTransaction.commit()
     }
 

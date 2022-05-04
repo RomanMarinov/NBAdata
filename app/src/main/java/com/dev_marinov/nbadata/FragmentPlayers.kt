@@ -14,7 +14,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-class FragmentList : Fragment() {
+class FragmentPlayers : Fragment() {
 
     lateinit var recyclerView: RecyclerView
     var adapterList: AdapterList? = null

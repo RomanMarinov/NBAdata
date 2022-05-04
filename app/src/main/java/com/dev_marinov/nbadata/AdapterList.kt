@@ -31,7 +31,12 @@ class AdapterList(val requireActivity: FragmentActivity, var hashMap: HashMap<In
             holder.city.setText(objectList.city.toString())
             holder.conference.setText(objectList.conference.toString())
             holder.division.setText(objectList.division.toString())
-            holder.position.setText(objectList.position.toString())
+
+            if (!objectList.position.toString().equals("")) {
+                holder.position.setText(objectList.position.toString())
+            } else {
+                holder.position.setText("n/f")
+            }
         }
     }
 

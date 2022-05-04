@@ -1,59 +1,75 @@
 package com.dev_marinov.nbadata
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentTabViewPager2.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentTabViewPager2 : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var viewPager2: ViewPager2
+    lateinit var tabLayout: TabLayout
+    lateinit var titleTab: ArrayList<String> // массив названий табов заголовков
+    lateinit var fragmentList: ArrayList<String> // массив табов фрагментов
+    var adapterViewPager2: AdapterViewPager2? = null
+
+    var viewGroupTabViewPager2: ViewGroup? = null
+    var myLayoutInflater: LayoutInflater? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        viewGroupTabViewPager2 = container
+        myLayoutInflater = inflater
+
+        return initInterface()
+    }
+
+    // https://stackoverflow.com/questions/54266160/changing-a-recyclerviews-layout-upon-orientation-change-only-works-on-the-first
+    fun initInterface(): View? { // удалить android:configChanges из манифеста для применения данной стратегии
+        val view: View
+        // если уже есть надутый макет, удалить его.
+        if (viewGroupTabViewPager2 != null) {
+            viewGroupTabViewPager2!!.removeAllViewsInLayout() // отличается от removeAllView
         }
+        // получить экран ориентации
+        val orientation = requireActivity().resources.configuration.orientation
+        // раздуть соответствующий макет в зависимости от ориентации экрана
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            view = layoutInflater.inflate(R.layout.fragment_list, viewGroupTabViewPager2, false)
+        } else {
+            view = layoutInflater.inflate(R.layout.fragment_list, viewGroupTabViewPager2, false)
+        }
+
+        viewGroupTabViewPager2 = view.findViewById(R.id.viewPager2)
+        tabLayout = view.findViewById(R.id.tabLayout)
+
+        titleTab = ArrayList()
+        titleTab.add("Players")
+        titleTab.add("Games")
+        titleTab.add("Teams")
+        titleTab.add("Stats")
+
+        fragmentList = ArrayList()
+
+
+        return view // в onCreateView() возвращаем объект View, который является корневым элементом разметки фрагмента.
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tab_view_pager2, container, false)
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        Log.e("333", "-зашел FragmentHome onConfigurationChanged-")
+        // ДО СОЗДАНИЯ НОВОГО МАКЕТА ПИШЕМ ПЕРЕМЕННЫЕ В КОТОРЫЕ СОХРАНЯЕМ ЛЮБЫЕ ДАННЫЕ ИЗ ТЕКУЩИХ VIEW
+        // создать новый макет------------------------------
+        val view: View = initInterface()!!
+        // ПОСЛЕ СОЗДАНИЯ НОВОГО МАКЕТА ПЕРЕДАЕМ СОХРАНЕННЫЕ ДАННЫЕ В СТАРЫЕ(ТЕ КОТОРЫЕ ТЕКУЩИЕ) VIEW
+        // отображать новую раскладку на экране
+        viewGroupTabViewPager2?.addView(view)
+        super.onConfigurationChanged(newConfig)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentTabViewPager2.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            FragmentTabViewPager2().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

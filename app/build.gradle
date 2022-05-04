@@ -51,4 +51,7 @@ dependencies {
     implementation 'com.loopj.android:android-async-http:1.4.11' // библиотека для http запросов, при подклччению к сайту
 
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-beta01'
 }
