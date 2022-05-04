@@ -9,13 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 class FragmentTabViewPager2 : Fragment() {
 
     lateinit var viewPager2: ViewPager2
     lateinit var tabLayout: TabLayout
     lateinit var titleTab: ArrayList<String> // массив названий табов заголовков
-    lateinit var fragmentList: ArrayList<String> // массив табов фрагментов
+    lateinit var fragmentList: ArrayList<Fragment> // массив табов фрагментов
     var adapterViewPager2: AdapterViewPager2? = null
 
     var viewGroupTabViewPager2: ViewGroup? = null
@@ -40,22 +41,61 @@ class FragmentTabViewPager2 : Fragment() {
         val orientation = requireActivity().resources.configuration.orientation
         // раздуть соответствующий макет в зависимости от ориентации экрана
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            view = layoutInflater.inflate(R.layout.fragment_list, viewGroupTabViewPager2, false)
+            view = layoutInflater.inflate(R.layout.fragment_tab_view_pager2, viewGroupTabViewPager2, false)
         } else {
-            view = layoutInflater.inflate(R.layout.fragment_list, viewGroupTabViewPager2, false)
+            view = layoutInflater.inflate(R.layout.fragment_tab_view_pager2, viewGroupTabViewPager2, false)
         }
 
-        viewGroupTabViewPager2 = view.findViewById(R.id.viewPager2)
+        viewPager2 = view.findViewById(R.id.viewPager2)
         tabLayout = view.findViewById(R.id.tabLayout)
 
-        titleTab = ArrayList()
+        titleTab = ArrayList() // добавить заголовки для табов
         titleTab.add("Players")
-        titleTab.add("Games")
         titleTab.add("Teams")
-        titleTab.add("Stats")
+        titleTab.add("Games")
 
-        fragmentList = ArrayList()
+        fragmentList = ArrayList<Fragment>() // записать в массив все фрагменты для табов
+        fragmentList.add(FragmentPlayers())
+        fragmentList.add(FragmentTeams())
+        fragmentList.add(FragmentGames())
 
+        adapterViewPager2 = AdapterViewPager2(requireActivity(), fragmentList)
+
+        adapterViewPager2?.setData(fragmentList)
+
+        viewPager2.adapter = adapterViewPager2
+
+        viewPager2.offscreenPageLimit = 4
+
+        // TabLayoutMediator для синхронизации компонента TabLayout с ViewPager2
+        // установка текста заголовков вкладок, стиля вкладок
+        TabLayoutMediator(tabLayout, viewPager2, object : TabLayoutMediator.TabConfigurationStrategy {
+            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
+                try {
+                    tab.setText(titleTab[position])
+                }
+                catch (e:Exception) {
+                    Log.e("444", " try catch TabLayoutMediator$e")
+                }
+            }
+        }).attach()
+        // слушатель для viewPager2
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            override fun onPageSelected(position: Int) {
+                (activity as MainActivity).lastTab = position
+                super.onPageSelected(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
+        })
+        //восстановить состояние последнего выбранного таба
+//        tabLayout.selectTab(tabLayout.getTabAt((activity as MainActivity).lastTab!!))
 
         return view // в onCreateView() возвращаем объект View, который является корневым элементом разметки фрагмента.
     }

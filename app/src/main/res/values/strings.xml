@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">NBAdata</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+
+    <string name="title_viewPager2">NBA data for 2015 - 2019</string>
+    <string name="homeTeamAndScore">Home team and score</string>
+    <string name="visitorTeamAndScore">Visitor team and score</string>
 </resources>

@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="tabActive">#5BC5CD</color>
+    <color name="tabActive">#EE810D</color>
+
+    <color name="colorTurquoise">#477A7E</color>
 </resources>

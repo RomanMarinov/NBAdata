@@ -14,10 +14,10 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-class FragmentPlayers : Fragment() {
+open class FragmentPlayers : Fragment() {
 
     lateinit var recyclerView: RecyclerView
-    var adapterList: AdapterList? = null
+    var adapterList: AdapterListPlayers? = null
     var myViewGroup: ViewGroup? = null
     var myLayoutInflater: LayoutInflater? = null
     var gridLayoutManager: GridLayoutManager? = null
@@ -42,11 +42,11 @@ class FragmentPlayers : Fragment() {
         val orientation = requireActivity().resources.configuration.orientation
         // раздуть соответствующий макет в зависимости от ориентации экрана
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            view = layoutInflater.inflate(R.layout.fragment_list, myViewGroup, false)
+            view = layoutInflater.inflate(R.layout.fragment_players, myViewGroup, false)
 
             myRecyclerLayoutManagerAdapter(view, 1, (activity as MainActivity?)?.lastVisibleItem)
         } else {
-            view = layoutInflater.inflate(R.layout.fragment_list, myViewGroup, false)
+            view = layoutInflater.inflate(R.layout.fragment_players, myViewGroup, false)
 
             myRecyclerLayoutManagerAdapter(view, 2, (activity as MainActivity?)?.lastVisibleItem)
         }
@@ -82,7 +82,7 @@ class FragmentPlayers : Fragment() {
          gridLayoutManager = GridLayoutManager(activity, column)
          recyclerView.layoutManager = gridLayoutManager
 
-         adapterList = AdapterList(this.requireActivity(), (activity as MainActivity).hashMap, recyclerView)
+         adapterList = AdapterListPlayers(this.requireActivity(), (activity as MainActivity).hashMap, recyclerView)
 
          recyclerView.adapter = adapterList
 
@@ -118,7 +118,13 @@ class FragmentPlayers : Fragment() {
 
                         for (n in 0 until k) {// until значит что n in [1, 10), 10 будет исключён
 
-                            val fullName = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
+                            val firstName = jsonObject.getJSONArray("data").getJSONObject(n).getString("first_name")
+
+                            val lastName = jsonObject.getJSONArray("data").getJSONObject(n).getString("last_name")
+
+                            val position = jsonObject.getJSONArray("data").getJSONObject(n).getString("position")
+
+                            val team = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
                                 .getString("full_name")
 
                             val city = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
@@ -130,9 +136,9 @@ class FragmentPlayers : Fragment() {
                             val division = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
                                 .getString("division")
 
-                            val position = jsonObject.getJSONArray("data").getJSONObject(n).getString("position")
 
-                            (activity as MainActivity).hashMap.set(n, ObjectList(fullName, city, conference, division, position))
+                            (activity as MainActivity).hashMap.set(n, ObjectListPlayers(firstName, lastName, position,
+                                team, city, conference, division))
 
                         }
 

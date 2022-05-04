@@ -20,7 +20,7 @@
 <!--            </shape>-->
 
         </item>
-        <item android:drawable="@color/colorTurquoise"
+        <item android:drawable="@color/black"
             />
 
     </selector>
