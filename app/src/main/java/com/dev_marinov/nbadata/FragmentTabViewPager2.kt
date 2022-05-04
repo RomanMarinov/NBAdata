@@ -10,8 +10,22 @@ import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import android.view.animation.Animation
+
+import android.view.animation.TranslateAnimation
+import android.widget.TextView
+
 
 class FragmentTabViewPager2 : Fragment() {
+
+
+    val START_POS_X: Float = -800F
+    val END_POS_X: Float = 800F
+    val START_POS_Y: Float = 0F
+    val END_POS_Y: Float = 0F
+    val TICKER_DURATION: Long = 5000
+
+    lateinit var tvTitle: TextView
 
     lateinit var viewPager2: ViewPager2
     lateinit var tabLayout: TabLayout
@@ -96,6 +110,19 @@ class FragmentTabViewPager2 : Fragment() {
         })
         //восстановить состояние последнего выбранного таба
 //        tabLayout.selectTab(tabLayout.getTabAt((activity as MainActivity).lastTab!!))
+
+
+        val mAnimation: Animation = TranslateAnimation(
+            START_POS_X, END_POS_X,
+            START_POS_Y, END_POS_Y
+        )
+        mAnimation.duration = TICKER_DURATION
+        mAnimation.repeatMode = Animation.RESTART
+        mAnimation.repeatCount = Animation.INFINITE
+
+        tvTitle = view.findViewById(R.id.tvTitle);
+        tvTitle.setAnimation(mAnimation);
+
 
         return view // в onCreateView() возвращаем объект View, который является корневым элементом разметки фрагмента.
     }

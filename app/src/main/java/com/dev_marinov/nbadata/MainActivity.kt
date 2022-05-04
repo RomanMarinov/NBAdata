@@ -3,11 +3,12 @@ package com.dev_marinov.nbadata
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import android.view.WindowManager
+import android.os.Handler
+import android.os.Looper
+import android.view.*
 import androidx.core.content.ContextCompat
+import androidx.transition.*
+import com.airbnb.lottie.LottieAnimationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +20,9 @@ class MainActivity : AppCompatActivity() {
     var lastVisibleItem: Int? = null
     var lastVisibleItemTeams: Int? = null
     var lastVisibleItemGames: Int? = null
+    var animationView: LottieAnimationView? = null // анимация на старте
+
+    lateinit var viewGroup: ViewGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,22 +35,65 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide() // скрыть экшенбар
         setWindow()
         hideSystemUI() // сетинг для фул скрин по соответствующему сдк
+        animationView = findViewById(R.id.animationView)
 
-        val fragmentTabViewPager2 = FragmentTabViewPager2()
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.llFragViewPager2, fragmentTabViewPager2)
-        fragmentTransaction.commit()
+        // берем белый frameLayout, который растянут во весь экран и который находиться в activity_main
+        viewGroup = findViewById(R.id.fl_viewGroup)
+
+        showScene1() // сцена 1 старт с анимации баскетболиста
+    }
+
+    fun showScene1(){
+
+        val runnable1 = Runnable{ // анимация шарики при старте
+            animationView?.playAnimation()
+        }
+        Handler(Looper.getMainLooper()).postDelayed(runnable1, 0)
+        animationView?.cancelAnimation()
+
+        // запускаем showScene2 через 1.2сек
+        val runnable = Runnable {
+            showScene2()
+        }
+        Handler(Looper.getMainLooper()).postDelayed(runnable, 1200)
+
+        val runnable2 = Runnable{ // задержка 2 сек перед переходом во FragmentList
+            val fragmentTabViewPager2 = FragmentTabViewPager2()
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.add(R.id.llFragViewPager2, fragmentTabViewPager2)
+            fragmentTransaction.commit()
+        }
+        Handler(Looper.getMainLooper()).postDelayed(runnable2, 2000)
+    }
+
+    fun showScene2(){
+        val root = layoutInflater.inflate(R.layout.scene_animation, viewGroup, false) as? ViewGroup
+        if(root != null) {
+            val scene = Scene(viewGroup, root)
+            val transition = getScene2Transition()
+            TransitionManager.go(scene, transition)
+        }
+    }
+
+    fun getScene2Transition() : Transition {
+        val transitionSet: TransitionSet = TransitionSet()
+        // прменяем созданный класс анимации CircularRevealTransition
+        val circularRevealTransition: CircularRevealTransition = CircularRevealTransition()
+        circularRevealTransition.addTarget(R.id.cl_scene)
+        circularRevealTransition.setStartDelay(150)
+        circularRevealTransition.setDuration(800)
+        transitionSet.addTransition(circularRevealTransition)
+
+        return transitionSet
     }
 
     fun setWindow() {
         val window = window
-
         // FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS Флаг, указывающий, что это Окно отвечает за отрисовку фона для системных полос.
         // Если установлено, системные панели отображаются с прозрачным фоном, а соответствующие области в этом окне заполняются
         // цветами, указанными в Window#getStatusBarColor()и Window#getNavigationBarColor().
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-
         window.statusBarColor = ContextCompat.getColor(this, android.R.color.transparent); // прозрачный статус бар
         window.navigationBarColor  = ContextCompat.getColor(this, android.R.color.black); // черный бар навигации
     }
