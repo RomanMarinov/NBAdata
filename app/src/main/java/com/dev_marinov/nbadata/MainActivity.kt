@@ -147,4 +147,37 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
+
+    // интерфейс для работы с FragmentPlayers
+    interface MyInterFacePlayers{
+        fun methodMyInterFacePlayers()
+    }
+    fun setMyInterFacePlayers(myInterFacePlayers: MyInterFacePlayers) {
+        MainActivity.myInterFacePlayers = myInterFacePlayers
+    }
+
+    companion object{
+        lateinit var myInterFacePlayers: MyInterFacePlayers
+        lateinit var myInterFaceGames: MyInterFaceGames
+        lateinit var myInterFaceTeams : MyInterFaceTeams
+    }
+
+    // интерфейс для работы с FragmentPlayers
+    interface MyInterFaceGames{
+        fun methodMyInterFaceGames()
+    }
+    fun setMyInterFaceGames(myInterFaceGames: MyInterFaceGames) {
+        MainActivity.myInterFaceGames = myInterFaceGames
+    }
+
+    // интерфейс для работы с FragmentPlayers
+    interface MyInterFaceTeams{
+        fun methodMyInterFaceTeams()
+    }
+    fun setMyInterFaceTeams(myInterFaceTeams: MyInterFaceTeams) {
+        MainActivity.myInterFaceTeams = myInterFaceTeams
+    }
+
+
 }

@@ -9,19 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import okhttp3.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
 import java.lang.Exception
 
 open class FragmentPlayers : Fragment() {
-    
+
     lateinit var recyclerView: RecyclerView
-    var adapterList: AdapterListPlayers? = null
+    var adapterListPlayers: AdapterListPlayers? = null
     var myViewGroup: ViewGroup? = null
     var myLayoutInflater: LayoutInflater? = null
 
@@ -60,7 +55,18 @@ open class FragmentPlayers : Fragment() {
         if ((activity as MainActivity?)?.hashMapPlayers?.size == 0) {
             Log.e("333", "arrayList.size()=" + (activity as MainActivity?)?.hashMapPlayers?.size)
 
-            getData();/// + 20;
+            val requestDataPlayers = RequestDataPlayers()// получаем доступ к классу
+            requestDataPlayers.getData(requireActivity()) // передаем в метод контекст
+
+                // как только getData сработал интерфейс, мы  FragmentPlayers обновляем адаптер
+            // (это значит что данные из сети пришли и можно обновить адаптер)
+            (activity as MainActivity).setMyInterFacePlayers(object : MainActivity.MyInterFacePlayers {
+                override fun methodMyInterFacePlayers() {
+                    (activity as MainActivity).runOnUiThread {
+                        adapterListPlayers?.notifyDataSetChanged()
+                    }
+                }
+            })
 
         } else {
             Log.e("333", "FragmentHome arrayList.size()  НЕ ПУСТОЙ=")
@@ -92,9 +98,9 @@ open class FragmentPlayers : Fragment() {
          staggeredGridLayoutManager = StaggeredGridLayoutManager(column, StaggeredGridLayoutManager.VERTICAL)
          recyclerView.layoutManager = staggeredGridLayoutManager
 
-         adapterList = AdapterListPlayers(this.requireActivity(), (activity as MainActivity).hashMapPlayers, recyclerView)
+         adapterListPlayers = AdapterListPlayers(this.requireActivity(), (activity as MainActivity).hashMapPlayers, recyclerView)
 
-         recyclerView.adapter = adapterList
+         recyclerView.adapter = adapterListPlayers
 
          // слушатель recyclerView для сохранения последнего видимого элемента экрана
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
@@ -124,74 +130,4 @@ open class FragmentPlayers : Fragment() {
 
     }
 
-    fun getData(){
-
-
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url("https://free-nba.p.rapidapi.com/players?page=0&per_page=25")
-            .get()
-            .addHeader("X-RapidAPI-Host", "free-nba.p.rapidapi.com")
-            .addHeader("X-RapidAPI-Key", "3f235a9f12msh754db7d5868e472p168e1djsn3c41eccf8098")
-            .build()
-
-        try {
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.e("333", "-onFailure=")
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    //Log.e("333", "-onResponse=" + response.body?.string())
-                    try {
-                        val s = response.body?.string()
-
-                        val jsonObject: JSONObject = JSONObject(s)
-                        val k = jsonObject.getJSONArray("data").length()
-
-                        for (n in 0 until k) {// until значит что n in [1, 10), 10 будет исключён
-
-                            val firstName = jsonObject.getJSONArray("data").getJSONObject(n).getString("first_name")
-
-                            val lastName = jsonObject.getJSONArray("data").getJSONObject(n).getString("last_name")
-
-                            val position = jsonObject.getJSONArray("data").getJSONObject(n).getString("position")
-
-                            val team = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("full_name")
-
-                            val city = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("city")
-
-                            val conference = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("conference")
-
-                            val division = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("division")
-
-
-                            (activity as MainActivity).hashMapPlayers.set(n, ObjectListPlayers(firstName, lastName, position,
-                                team, city, conference, division))
-
-                        }
-
-                        (activity as MainActivity).runOnUiThread {
-                            adapterList?.notifyDataSetChanged()
-                        }
-
-                    }
-                    catch (e: JSONException) {
-                        Log.e("333", "-try catch низ=" + e)
-                    }
-
-                }
-            })
-        }
-        catch (e: JSONException) {
-            Log.e("333", "-try catch низ=" + e)
-        }
-
-
-    }
 }

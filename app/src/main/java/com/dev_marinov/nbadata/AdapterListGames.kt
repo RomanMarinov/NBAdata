@@ -17,7 +17,7 @@ class AdapterListGames (val requireActivity: FragmentActivity, var hashMap: Hash
     }
 
     override fun onBindViewHolder(holder: AdapterListGames.ViewHolder, position: Int) {
-        var objectListGames = hashMap[position]
+        val objectListGames = hashMap[position]
 
         if(objectListGames != null) {
 
@@ -53,12 +53,6 @@ class AdapterListGames (val requireActivity: FragmentActivity, var hashMap: Hash
             holder.cityVisitor.text = objectListGames.cityVisitor.toString()
             holder.divisionVisitor.text = objectListGames.divisionVisitor.toString()
             holder.scoreVisitor.text = objectListGames.scoreVisitor.toString()
-
-//            if (!objectList.position.toString().equals("")) {
-//                holder.position.setText(objectList.position.toString())
-//            } else {
-//                holder.position.setText("n/f")
-//            }
         }
     }
 

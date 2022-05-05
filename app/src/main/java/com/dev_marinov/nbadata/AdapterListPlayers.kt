@@ -18,7 +18,7 @@ class AdapterListPlayers(val requireActivity: FragmentActivity, var hashMap: Has
     }
 
     override fun onBindViewHolder(holder: AdapterListPlayers.ViewHolder, position: Int) {
-        var objectList = hashMap[position]
+        val objectList = hashMap[position]
 
         if(objectList != null) {
 

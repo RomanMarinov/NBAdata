@@ -9,13 +9,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import okhttp3.*
-import org.json.JSONException
-import org.json.JSONObject
-import java.io.IOException
 import java.lang.Exception
 
 
@@ -60,7 +55,16 @@ class FragmentTeams : Fragment() {
         if ((activity as MainActivity?)?.hashMapTeams?.size == 0) {
             Log.e("333", "arrayList.size()=" + (activity as MainActivity?)?.hashMapTeams?.size)
 
-            getData();/// + 20;
+            val requestDataTeams = RequestDataTeams()
+            requestDataTeams.getData(requireActivity())
+
+            (activity as MainActivity).setMyInterFaceTeams(object : MainActivity.MyInterFaceTeams{
+                override fun methodMyInterFaceTeams() {
+                    (activity as MainActivity).runOnUiThread {
+                        adapterListTeams?.notifyDataSetChanged()
+                    }
+                }
+            })
 
         } else {
             Log.e("333", "FragmentHome arrayList.size()  НЕ ПУСТОЙ=")
@@ -120,61 +124,4 @@ class FragmentTeams : Fragment() {
 
     }
 
-    fun getData(){
-
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url("https://free-nba.p.rapidapi.com/teams?page=0")
-            .get()
-            .addHeader("X-RapidAPI-Host", "free-nba.p.rapidapi.com")
-            .addHeader("X-RapidAPI-Key", "3f235a9f12msh754db7d5868e472p168e1djsn3c41eccf8098")
-            .build()
-
-        try {
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.e("333", "-onFailure=")
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    //Log.e("333", "-onResponse=" + response.body?.string())
-                    try {
-                        val s = response.body?.string()
-
-                        val jsonObject: JSONObject = JSONObject(s)
-                        val k = jsonObject.getJSONArray("data").length()
-
-                        for (n in 0 until k) {// until значит что n in [1, 10), 10 будет исключён
-
-                            val fullName = jsonObject.getJSONArray("data").getJSONObject(n).getString("full_name")
-
-                            val city = jsonObject.getJSONArray("data").getJSONObject(n).getString("city")
-
-                            val conference = jsonObject.getJSONArray("data").getJSONObject(n).getString("conference")
-
-                            val division = jsonObject.getJSONArray("data").getJSONObject(n).getString("division")
-
-                            (activity as MainActivity).hashMapTeams.set(n, ObjectListTeams(fullName, city, conference, division))
-
-                        }
-
-                        (activity as MainActivity).runOnUiThread {
-                            adapterListTeams?.notifyDataSetChanged()
-                        }
-
-                    }
-                    catch (e: JSONException) {
-                        Log.e("333", "-try catch низ=" + e)
-                    }
-
-                }
-            })
-        }
-        catch (e: JSONException) {
-            Log.e("333", "-try catch низ=" + e)
-        }
-
-
-    }
 }
