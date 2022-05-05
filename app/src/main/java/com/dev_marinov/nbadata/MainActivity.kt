@@ -1,34 +1,38 @@
 package com.dev_marinov.nbadata
 
+import android.app.Dialog
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
+import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.transition.*
 import com.airbnb.lottie.LottieAnimationView
 
 class MainActivity : AppCompatActivity() {
 
-
-    lateinit var hashMap: HashMap<Int, ObjectListPlayers>
+    lateinit var hashMapPlayers: HashMap<Int, ObjectListPlayers>
     lateinit var hashMapTeams: HashMap<Int, ObjectListTeams>
     lateinit var hashMapGames: HashMap<Int, ObjectListGames>
-    var lastTab: Int? = null
-    var lastVisibleItem: Int? = null
+    var lastTab: Int = 0
+    var lastVisibleItemPlayers: Int? = null
     var lastVisibleItemTeams: Int? = null
     var lastVisibleItemGames: Int? = null
     var animationView: LottieAnimationView? = null // анимация на старте
 
     lateinit var viewGroup: ViewGroup
+    lateinit var btNo: Button
+    lateinit var btYes: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        hashMap = HashMap()
+        hashMapPlayers = HashMap()
         hashMapTeams = HashMap()
         hashMapGames = HashMap()
 
@@ -119,5 +123,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+         //  если flag false значит работаем с backstack fragment
+            supportFragmentManager.popBackStack() // удаление фрагментов из транзакции
+            myAlertDialog() // метод реализации диалога с пользователем закрыть приложение или нет
+    }
 
+    fun myAlertDialog() {
+        val dialog: Dialog = Dialog(this@MainActivity)
+        dialog.setContentView(R.layout.windows_alertdialog)
+        dialog.setCancelable(false)
+        dialog.show()
+
+        btNo = dialog.findViewById<Button>(R.id.btNo)
+        btYes = dialog.findViewById<Button>(R.id.btYes)
+
+        btNo.setOnClickListener {
+            dialog.dismiss()
+            dialog.cancel()
+        }
+        btYes.setOnClickListener{
+            dialog.dismiss()
+            finish()
+        }
+    }
 }

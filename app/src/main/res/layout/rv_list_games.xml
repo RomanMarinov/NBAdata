@@ -384,7 +384,7 @@
                 android:text="division"
                 android:textColor="@color/white"
                 android:fontFamily="@font/bai_jamjuree_extralight"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="20dp"
                 />
             <TextView
                 android:id="@+id/tvDivisionVisitor"

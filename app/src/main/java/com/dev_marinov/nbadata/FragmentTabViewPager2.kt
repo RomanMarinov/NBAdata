@@ -19,8 +19,8 @@ import android.widget.TextView
 class FragmentTabViewPager2 : Fragment() {
 
 
-    val START_POS_X: Float = -800F
-    val END_POS_X: Float = 800F
+    var START_POS_X: Float? = null
+    var END_POS_X: Float? = null
     val START_POS_Y: Float = 0F
     val END_POS_Y: Float = 0F
     val TICKER_DURATION: Long = 5000
@@ -56,12 +56,17 @@ class FragmentTabViewPager2 : Fragment() {
         // раздуть соответствующий макет в зависимости от ориентации экрана
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             view = layoutInflater.inflate(R.layout.fragment_tab_view_pager2, viewGroupTabViewPager2, false)
+            START_POS_X = -800F
+            END_POS_X = 800F
         } else {
-            view = layoutInflater.inflate(R.layout.fragment_tab_view_pager2, viewGroupTabViewPager2, false)
+            view = layoutInflater.inflate(R.layout.fragment_tab_view_pager2_horiz, viewGroupTabViewPager2, false)
+            START_POS_X = -1200F
+            END_POS_X = 1200F
         }
 
         viewPager2 = view.findViewById(R.id.viewPager2)
         tabLayout = view.findViewById(R.id.tabLayout)
+
 
         titleTab = ArrayList() // добавить заголовки для табов
         titleTab.add("Players")
@@ -79,7 +84,7 @@ class FragmentTabViewPager2 : Fragment() {
 
         viewPager2.adapter = adapterViewPager2
 
-        viewPager2.offscreenPageLimit = 4
+        viewPager2.offscreenPageLimit = 3
 
         // TabLayoutMediator для синхронизации компонента TabLayout с ViewPager2
         // установка текста заголовков вкладок, стиля вкладок
@@ -108,12 +113,10 @@ class FragmentTabViewPager2 : Fragment() {
                 super.onPageScrollStateChanged(state)
             }
         })
-        //восстановить состояние последнего выбранного таба
-//        tabLayout.selectTab(tabLayout.getTabAt((activity as MainActivity).lastTab!!))
 
 
         val mAnimation: Animation = TranslateAnimation(
-            START_POS_X, END_POS_X,
+            START_POS_X!!, END_POS_X!!,
             START_POS_Y, END_POS_Y
         )
         mAnimation.duration = TICKER_DURATION
@@ -122,6 +125,14 @@ class FragmentTabViewPager2 : Fragment() {
 
         tvTitle = view.findViewById(R.id.tvTitle);
         tvTitle.setAnimation(mAnimation);
+
+
+
+
+       //восстановить состояние последнего выбранного таба после поворота экрана
+            tabLayout.selectTab(tabLayout.getTabAt((activity as MainActivity).lastTab!!))
+
+            //viewPager2.currentItem = (activity as MainActivity).lastTab!!
 
 
         return view // в onCreateView() возвращаем объект View, который является корневым элементом разметки фрагмента.
@@ -137,6 +148,13 @@ class FragmentTabViewPager2 : Fragment() {
         // отображать новую раскладку на экране
         viewGroupTabViewPager2?.addView(view)
         super.onConfigurationChanged(newConfig)
+
+//восстановить состояние последнего выбранного таба после поворота экрана
+        tabLayout.selectTab(tabLayout.getTabAt((activity as MainActivity).lastTab!!))
+        viewPager2.currentItem = (activity as MainActivity).lastTab!!
+
+        viewPager2.offscreenPageLimit = 3 //??????????????????????????????????????????????
+
     }
 
 }

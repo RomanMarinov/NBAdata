@@ -6,7 +6,7 @@
     android:id="@+id/clFragViewPager2Main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pic_1"
+    android:background="@drawable/pic_2"
     tools:context=".FragmentTabViewPager2">
 
     <TextView
@@ -43,6 +43,7 @@
             app:tabIndicatorHeight="0dp"
             app:tabSelectedTextColor="@color/white"
             app:tabMode="fixed"
+            app:tabGravity="fill"
             app:tabBackground="@drawable/rounded_second_buttons"
             app:tabTextColor="@color/white"
             app:tabTextAppearance="@style/CustomTextAppearanceTab"
