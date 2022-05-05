@@ -60,7 +60,6 @@ class RequestDataPlayers {
 
                         }
 
-
                         MainActivity.myInterFacePlayers.methodMyInterFacePlayers()
 
                     }

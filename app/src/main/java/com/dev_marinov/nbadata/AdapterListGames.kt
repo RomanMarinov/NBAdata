@@ -37,7 +37,7 @@ class AdapterListGames (val requireActivity: FragmentActivity, var hashMap: Hash
             holder.divisionVisitor.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
             holder.scoreVisitor.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
 
-
+            // установка текста в views
             holder.date.text = objectListGames.date.toString().substring(0, 10)
             holder.teamHome.text = objectListGames.teamHome.toString()
             holder.cityHome.text = objectListGames.cityHome.toString()

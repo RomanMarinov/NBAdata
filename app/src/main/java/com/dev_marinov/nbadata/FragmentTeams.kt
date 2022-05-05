@@ -55,9 +55,10 @@ class FragmentTeams : Fragment() {
         if ((activity as MainActivity?)?.hashMapTeams?.size == 0) {
             Log.e("333", "arrayList.size()=" + (activity as MainActivity?)?.hashMapTeams?.size)
 
-            val requestDataTeams = RequestDataTeams()
-            requestDataTeams.getData(requireActivity())
-
+            val requestDataTeams = RequestDataTeams()// получаем доступ к классу
+            requestDataTeams.getData(requireActivity()) // передаем в метод контекст
+            // как только getData сработал интерфейс, мы  FragmentTeams обновляем адаптер
+            // (это значит что данные из сети пришли и можно обновить адаптер)
             (activity as MainActivity).setMyInterFaceTeams(object : MainActivity.MyInterFaceTeams{
                 override fun methodMyInterFaceTeams() {
                     (activity as MainActivity).runOnUiThread {

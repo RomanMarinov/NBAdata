@@ -20,7 +20,6 @@ class FragmentGames : Fragment() {
     var adapterListGames: AdapterListGames? = null
     var myViewGroup: ViewGroup? = null
     var myLayoutInflater: LayoutInflater? = null
-    var gridLayoutManager: GridLayoutManager? = null
 
     var lastVisibleItemPositions: IntArray? = null
     lateinit var staggeredGridLayoutManager: StaggeredGridLayoutManager
@@ -57,9 +56,10 @@ class FragmentGames : Fragment() {
         if ((activity as MainActivity?)?.hashMapGames?.size == 0) {
             Log.e("333", "arrayList.size()=" + (activity as MainActivity?)?.hashMapGames?.size)
 
-            val requestDataGames = RequestDataGames()
-            requestDataGames.getData(requireActivity())
-
+            val requestDataGames = RequestDataGames()// получаем доступ к классу
+            requestDataGames.getData(requireActivity()) // передаем в метод контекст
+            // как только getData сработал интерфейс, мы  FragmentGames обновляем адаптер
+            // (это значит что данные из сети пришли и можно обновить адапте
             (activity as MainActivity).setMyInterFaceGames(object :MainActivity.MyInterFaceGames {
                 override fun methodMyInterFaceGames() {
                     (activity as MainActivity).runOnUiThread {
@@ -124,8 +124,6 @@ class FragmentGames : Fragment() {
         }
         Handler(Looper.getMainLooper()).postDelayed(runnable, 500)
 
-
     }
-
 
 }

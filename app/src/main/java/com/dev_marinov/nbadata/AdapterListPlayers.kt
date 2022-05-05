@@ -30,6 +30,7 @@ class AdapterListPlayers(val requireActivity: FragmentActivity, var hashMap: Has
             holder.conference.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
             holder.division.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
 
+            // установка текста в views
             holder.firstName.text = objectList.firstName.toString()
             holder.lastName.text = objectList.lastName.toString()
             holder.team.text = objectList.team.toString()
@@ -37,6 +38,7 @@ class AdapterListPlayers(val requireActivity: FragmentActivity, var hashMap: Has
             holder.conference.text = objectList.conference.toString()
             holder.division.text = objectList.division.toString()
 
+            // в position не всегда есть данные, поэтому условие
             if (!objectList.position.toString().equals("")) {
                 holder.position.text = objectList.position.toString()
             } else {

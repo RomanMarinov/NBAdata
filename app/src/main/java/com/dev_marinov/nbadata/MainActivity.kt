@@ -149,6 +149,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    companion object{
+        lateinit var myInterFacePlayers: MyInterFacePlayers
+        lateinit var myInterFaceGames: MyInterFaceGames
+        lateinit var myInterFaceTeams : MyInterFaceTeams
+    }
+
     // интерфейс для работы с FragmentPlayers
     interface MyInterFacePlayers{
         fun methodMyInterFacePlayers()
@@ -157,13 +163,7 @@ class MainActivity : AppCompatActivity() {
         MainActivity.myInterFacePlayers = myInterFacePlayers
     }
 
-    companion object{
-        lateinit var myInterFacePlayers: MyInterFacePlayers
-        lateinit var myInterFaceGames: MyInterFaceGames
-        lateinit var myInterFaceTeams : MyInterFaceTeams
-    }
-
-    // интерфейс для работы с FragmentPlayers
+    // интерфейс для работы с FragmentGames
     interface MyInterFaceGames{
         fun methodMyInterFaceGames()
     }
@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
         MainActivity.myInterFaceGames = myInterFaceGames
     }
 
-    // интерфейс для работы с FragmentPlayers
+    // интерфейс для работы с FragmentTeams
     interface MyInterFaceTeams{
         fun methodMyInterFaceTeams()
     }

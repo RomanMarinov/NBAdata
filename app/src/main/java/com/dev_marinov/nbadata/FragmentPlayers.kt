@@ -57,7 +57,6 @@ open class FragmentPlayers : Fragment() {
 
             val requestDataPlayers = RequestDataPlayers()// получаем доступ к классу
             requestDataPlayers.getData(requireActivity()) // передаем в метод контекст
-
                 // как только getData сработал интерфейс, мы  FragmentPlayers обновляем адаптер
             // (это значит что данные из сети пришли и можно обновить адаптер)
             (activity as MainActivity).setMyInterFacePlayers(object : MainActivity.MyInterFacePlayers {
@@ -103,18 +102,18 @@ open class FragmentPlayers : Fragment() {
          recyclerView.adapter = adapterListPlayers
 
          // слушатель recyclerView для сохранения последнего видимого элемента экрана
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+             recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 lastVisibleItemPositions = staggeredGridLayoutManager.findFirstVisibleItemPositions(null)
 
                 (context as MainActivity).lastVisibleItemPlayers = getMaxPosition(lastVisibleItemPositions!!)
-            }
+             }
 
-            private fun getMaxPosition(positions: IntArray): Int {
+             private fun getMaxPosition(positions: IntArray): Int {
                 return positions[0]
-            }
+             }
         })
 
          val runnable = Runnable { // установка последнего элемента в главном потоке
@@ -127,7 +126,6 @@ open class FragmentPlayers : Fragment() {
              }
          }
          Handler(Looper.getMainLooper()).postDelayed(runnable, 500)
-
     }
 
 }

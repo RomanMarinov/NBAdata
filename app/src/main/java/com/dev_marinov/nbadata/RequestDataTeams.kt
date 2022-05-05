@@ -9,8 +9,6 @@ import java.io.IOException
 
 class RequestDataTeams {
 
-
-
     fun getData(requireActivity: FragmentActivity) {
 
         val client = OkHttpClient()

@@ -25,6 +25,7 @@ class AdapterListTeams(var requireActivity: FragmentActivity, var hashMapTeams: 
             holder.conference.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
             holder.division.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
 
+            // установка текста в views
             holder.fullName.setText(objectListTeams.fullName.toString())
             holder.city.setText(objectListTeams.city.toString())
             holder.conference.setText(objectListTeams.conference.toString())
