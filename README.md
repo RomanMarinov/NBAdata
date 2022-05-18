@@ -7,6 +7,14 @@
 ## Работа с кодом 
 Клиентская часть: android studio kotlin. Запрос api.
 
+scenes transition with lottie,
+viewModel, 
+mvvm, 
+animations recyclerView,
+animation textView,
+asyncHttpClient,
+tabLayout, viewPager2
+
 ## Скрины экрана 
 
 https://user-images.githubusercontent.com/61028366/166897689-46169abc-2d07-4044-9469-6ef205f12a7d.mp4
