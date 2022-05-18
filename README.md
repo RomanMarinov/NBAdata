@@ -2,17 +2,16 @@
 
 ## Описание 
 Андроид приложение позволяет получить данные nba игроков, команд и игр за 2019.
-Реализовано animation, поворот экрана, память recyclerView.
 
 ## Работа с кодом 
 Клиентская часть: android studio kotlin. Запрос api.
 
-scenes transition with lottie,
-viewModel, 
-mvvm, 
-animations recyclerView,
-animation textView,
-asyncHttpClient,
+scenes transition with lottie,<br/>
+viewModel,<br/>
+mvvm, <br/>
+animations recyclerView,<br/>
+animation textView,<br/>
+asyncHttpClient,<br/>
 tabLayout, viewPager2
 
 ## Скрины экрана 
