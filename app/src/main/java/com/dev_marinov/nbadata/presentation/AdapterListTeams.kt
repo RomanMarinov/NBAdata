@@ -27,22 +27,20 @@ class AdapterListTeams(var requireActivity: FragmentActivity) : RecyclerView.Ada
         return hashMap.size
     }
 
-
     //передаем данные и оповещаем адаптер о необходимости обновления списка
     fun refreshUsers(hashMap: HashMap<Int, ObjectListTeams>) {
         this.hashMap = hashMap
         notifyDataSetChanged()
     }
 
-
     class ViewHolder(itemView: View, var requireActivity: FragmentActivity) :RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: ObjectListTeams) = with(itemView) {
 
             val fullName: TextView = itemView.findViewById<TextView>(R.id.tvName)
-            val city: TextView = itemView.findViewById<TextView>(R.id.tvCity)
-            val conference: TextView = itemView.findViewById<TextView>(R.id.tvConference)
-            val division: TextView = itemView.findViewById<TextView>(R.id.tvDivision)
+            val city: TextView = itemView.findViewById<TextView>(R.id.tvTeamsCity)
+            val conference: TextView = itemView.findViewById<TextView>(R.id.tvTeamsConference)
+            val division: TextView = itemView.findViewById<TextView>(R.id.tvTeamsDivision)
 
             fullName.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
             city.animation = AnimationUtils.loadAnimation(requireActivity, R.anim.scale_up_1) // анимация
