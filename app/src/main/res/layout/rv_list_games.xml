@@ -37,23 +37,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvDate"
+                android:id="@+id/tvGamesDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="date"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:fontFamily="@font/baloo_thambi"
                 android:layout_marginStart="10dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/baloo_thambi"
+                android:text="date"
+                android:textColor="@color/white"
+                android:textSize="20dp"
                 app:layout_constraintLeft_toRightOf="@id/tvNamePlayersTile"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
 
 
         <TextView
-            android:id="@+id/tvHomeTeam"
+            android:id="@+id/tvGamesHomeTeam"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/homeTeamAndScore"
@@ -69,7 +68,7 @@
             android:id="@+id/llTwo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tvHomeTeam"
+            app:layout_constraintTop_toBottomOf="@id/tvGamesHomeTeam"
             app:layout_constraintLeft_toLeftOf="parent"
             >
 
@@ -84,7 +83,7 @@
                 app:layout_constraintLeft_toRightOf="@id/tvNameTeamTile"
                 />
             <TextView
-                android:id="@+id/tvNameTeam"
+                android:id="@+id/tvGamesNameTeam"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="team"
@@ -117,7 +116,7 @@
                 android:textColor="@color/white"
                 />
             <TextView
-                android:id="@+id/tvCity"
+                android:id="@+id/tvGamesCity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="city"
@@ -138,7 +137,7 @@
                 android:layout_marginStart="30dp"
                 />
             <TextView
-                android:id="@+id/tvConference"
+                android:id="@+id/tvGamesConference"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="conference"
@@ -168,7 +167,7 @@
                 android:fontFamily="@font/bai_jamjuree_extralight"
                 />
             <TextView
-                android:id="@+id/tvDivisionHome"
+                android:id="@+id/tvGamesDivisionHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="division"
@@ -199,7 +198,7 @@
                 android:fontFamily="@font/bai_jamjuree_extralight"
                 />
             <TextView
-                android:id="@+id/tvScore"
+                android:id="@+id/tvGamesScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="score"
@@ -219,7 +218,7 @@
                 android:fontFamily="@font/bai_jamjuree_extralight"
                 />
             <TextView
-                android:id="@+id/tvPeriod"
+                android:id="@+id/tvGamesPeriod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="period"
@@ -248,7 +247,7 @@
                 android:fontFamily="@font/bai_jamjuree_extralight"
                 />
             <TextView
-                android:id="@+id/tvSeason"
+                android:id="@+id/tvGamesSeason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="season"
@@ -268,7 +267,7 @@
                 android:fontFamily="@font/bai_jamjuree_extralight"
                 />
             <TextView
-                android:id="@+id/tvStatus"
+                android:id="@+id/tvGamesStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="status"
@@ -308,7 +307,7 @@
                 android:textColor="@color/white"
                 />
             <TextView
-                android:id="@+id/tvNameVisitor"
+                android:id="@+id/tvGamesNameVisitor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="team"
@@ -338,7 +337,7 @@
 
                 />
             <TextView
-                android:id="@+id/tvConferenceVisitor"
+                android:id="@+id/tvGamesConferenceVisitor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="conference"
@@ -368,7 +367,7 @@
                 android:fontFamily="@font/bai_jamjuree_extralight"
                 />
             <TextView
-                android:id="@+id/tvCityVisitor"
+                android:id="@+id/tvGamesCityVisitor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="city"
@@ -387,7 +386,7 @@
                 android:layout_marginStart="20dp"
                 />
             <TextView
-                android:id="@+id/tvDivisionVisitor"
+                android:id="@+id/tvGamesDivisionVisitor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="division"
@@ -418,7 +417,7 @@
             android:fontFamily="@font/bai_jamjuree_extralight"
             />
         <TextView
-            android:id="@+id/tvScoreVisitor"
+            android:id="@+id/tvGamesScoreVisitor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="score"

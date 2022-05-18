@@ -93,10 +93,9 @@
                 android:id="@+id/tvCityTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="city"
-                android:textColor="@color/white"
                 android:fontFamily="@font/bai_jamjuree_extralight"
-                />
+                android:text="city"
+                android:textColor="@color/white" />
             <TextView
                 android:id="@+id/tvCity"
                 android:layout_width="wrap_content"
