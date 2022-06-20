@@ -11,7 +11,7 @@
 - mvvm, <br/>
 - animations recyclerView,<br/>
 - animation textView,<br/>
-- asyncHttpClient,<br/>
+- okHttpClient,<br/>
 - tabLayout, viewPager2
 
 ## Скрины экрана 
