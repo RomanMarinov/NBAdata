@@ -1,4 +1,4 @@
-package com.dev_marinov.nbadata.presentation
+package com.dev_marinov.nbadata.presentation.viewpager2
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -16,8 +16,11 @@ import android.view.animation.TranslateAnimation
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.dev_marinov.nbadata.R
+import com.dev_marinov.nbadata.presentation.games.GamesFragment
+import com.dev_marinov.nbadata.presentation.players.PlayersFragment
+import com.dev_marinov.nbadata.presentation.teams.TeamsFragment
 
-class FragmentTabViewPager2 : Fragment() {
+class ViewPager2Fragment : Fragment() {
 
     lateinit var viewModelTabViewPager2: ViewModelTabViewPager2
 
@@ -78,11 +81,11 @@ class FragmentTabViewPager2 : Fragment() {
             titleTab.add("Games")
 
             fragmentList = ArrayList<Fragment>() // записать в массив все фрагменты для табов
-            fragmentList.add(FragmentPlayers())
-            fragmentList.add(FragmentTeams())
-            fragmentList.add(FragmentGames())
+            fragmentList.add(PlayersFragment())
+            fragmentList.add(TeamsFragment())
+            fragmentList.add(GamesFragment())
 
-            val adapterViewPager2 = AdapterViewPager2(requireActivity(), fragmentList)
+            val adapterViewPager2 = ViewPager2Adapter(requireActivity(), fragmentList)
 
             adapterViewPager2.setData(fragmentList)
 

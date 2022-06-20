@@ -1,8 +1,8 @@
-package com.dev_marinov.nbadata.model
+package com.dev_marinov.nbadata.model.teams
 
 import android.util.Log
 import com.dev_marinov.nbadata.data.ObjectListTeams
-import com.dev_marinov.nbadata.presentation.FragmentTeams
+import com.dev_marinov.nbadata.presentation.teams.TeamsFragment
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -50,14 +50,10 @@ object RequestDataTeams {
                             hashMapTeams[n] = ObjectListTeams(fullName, city, conference, division)
 
                         }
-
-                       FragmentTeams.myInterFaceTeams.methodMyInterFaceTeams()
-
                     }
                     catch (e: JSONException) {
                         Log.e("333", "-try catch низ=" + e)
                     }
-
                 }
             })
         }

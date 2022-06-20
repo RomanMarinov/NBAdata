@@ -1,16 +1,13 @@
-package com.dev_marinov.nbadata.model
+package com.dev_marinov.nbadata.model.games
 
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.MutableLiveData
 import com.dev_marinov.nbadata.data.ObjectListGames
-import com.dev_marinov.nbadata.presentation.FragmentGames
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 
-object RequestDataGames {
+class RequestDataGames {
 
     var hashMapGames: HashMap<Int, ObjectListGames> = HashMap()
 
@@ -81,7 +78,7 @@ object RequestDataGames {
 
                         }
 
-                        FragmentGames.myInterFaceGames.methodMyInterFaceGames()
+
 
                     }
                     catch (e: JSONException) {

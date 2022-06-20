@@ -1,9 +1,8 @@
-package com.dev_marinov.nbadata.model
+package com.dev_marinov.nbadata.model.players
 
 import android.util.Log
-import androidx.fragment.app.FragmentActivity
 import com.dev_marinov.nbadata.data.ObjectListPlayers
-import com.dev_marinov.nbadata.presentation.FragmentPlayers
+import com.dev_marinov.nbadata.presentation.players.PlayersFragment
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -65,7 +64,7 @@ object RequestDataPlayers {
 
                         }
 
-                        FragmentPlayers.myInterFacePlayers.methodMyInterFacePlayers()
+
 
                     }
                     catch (e: JSONException) {

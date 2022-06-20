@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="games"
+            type="com.dev_marinov.nbadata.data.ObjectListGames" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:background="@android:color/black">
+
+            <LinearLayout
+                android:id="@+id/llOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:id="@+id/tvDateTile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+                    android:text="date"
+                    android:textColor="@color/white"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvGamesDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:text="@{games.date}"
+                    android:maxLength="10"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintLeft_toRightOf="@id/tvNamePlayersTile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvGamesHomeTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/homeTeamAndScore"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bai_jamjuree_extralight"
+                app:layout_constraintTop_toBottomOf="@id/llOne"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+            <LinearLayout
+                android:id="@+id/llTwo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvGamesHomeTeam"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:id="@+id/tvNameTeamTile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="team"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toRightOf="@id/tvNameTeamTile" />
+
+                <TextView
+                    android:id="@+id/tvGamesNameTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:text="@{games.teamHome}"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintLeft_toRightOf="@id/tvNameTeamTile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llThree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llTwo"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:id="@+id/tvCityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+                    android:text="city"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tvGamesCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.cityHome}"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+
+                <TextView
+                    android:id="@+id/tvConferenceTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="conference"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+                    android:layout_marginStart="30dp" />
+
+                <TextView
+                    android:id="@+id/tvGamesConference"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.conferenceHome}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llFour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llThree"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="division"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesDivisionHome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.divisionHome}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llFive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llFour"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:id="@+id/tvScoreTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="score"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.scoreHome}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:id="@+id/tvPeriodTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="period"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="30dp"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.periodHome}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llSix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llFive"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:id="@+id/tvSeasinTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="season"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesSeason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.seasonHome}"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:id="@+id/tvStatusTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="status"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="30dp"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.statusHome}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvVisitorTeam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/visitorTeamAndScore"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:fontFamily="@font/bai_jamjuree_extralight"
+                app:layout_constraintTop_toBottomOf="@id/llSix" />
+
+
+            <LinearLayout
+                android:id="@+id/llSeven"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/tvVisitorTeam"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+                    android:text="team"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tvGamesNameVisitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.teamVisitor}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llEight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llSeven"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="conference"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tvGamesConferenceVisitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.conferenceVisitor}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llNine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llEight"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="city"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesCityVisitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.cityVisitor}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="division"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight"
+                    android:layout_marginStart="20dp" />
+
+                <TextView
+                    android:id="@+id/tvGamesDivisionVisitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.divisionVisitor}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llTen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/llNine"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="score"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/bai_jamjuree_extralight" />
+
+                <TextView
+                    android:id="@+id/tvGamesScoreVisitor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{games.scoreVisitor}"
+                    android:textSize="20dp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/baloo_thambi"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

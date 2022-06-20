@@ -6,18 +6,24 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import androidx.transition.*
 import com.airbnb.lottie.LottieAnimationView
 import com.dev_marinov.nbadata.CircularRevealTransition
 import com.dev_marinov.nbadata.R
+import com.dev_marinov.nbadata.databinding.ActivityMainBinding
+import com.dev_marinov.nbadata.presentation.viewpager2.ViewPager2Fragment
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
-    var animationView: LottieAnimationView? = null // анимация на старте
-
+    private lateinit var binding: ActivityMainBinding
     lateinit var viewGroup: ViewGroup
     lateinit var btNo: Button
     lateinit var btYes: Button
@@ -26,14 +32,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
 
         mySavedInstanceState = savedInstanceState
 
         supportActionBar?.hide() // скрыть экшенбар
         setWindow()
         hideSystemUI() // сетинг для фул скрин по соответствующему сдк
-        animationView = findViewById(R.id.animationView)
+
 
         // берем белый frameLayout, который растянут во весь экран и который находиться в activity_main
         viewGroup = findViewById(R.id.fl_viewGroup)
@@ -41,13 +49,22 @@ class MainActivity : AppCompatActivity() {
         showScene1() // сцена 1 старт с анимации баскетболиста
     }
 
-    fun showScene1(){
+    private fun showScene1(){
 
-        val runnable1 = Runnable{ // анимация шарики при старте
-            animationView?.playAnimation()
+        lifecycleScope.launch(Dispatchers.Main) {
+                binding.animationView.playAnimation()
         }
-        Handler(Looper.getMainLooper()).postDelayed(runnable1, 0)
-        animationView?.cancelAnimation()
+
+
+
+//        val runnable1 = Runnable{ // анимация шарики при старте
+//            binding.animationView.playAnimation()
+//        }
+//        Handler(Looper.getMainLooper()).postDelayed(runnable1, 0)
+        //binding.animationView.cancelAnimation()
+
+
+
 
         // запускаем showScene2 через 1.2сек
         val runnable = Runnable {
@@ -55,10 +72,12 @@ class MainActivity : AppCompatActivity() {
         }
         Handler(Looper.getMainLooper()).postDelayed(runnable, 1200)
 
+
+
         val runnable2 = Runnable{ // задержка 2 сек перед переходом во FragmentList
             if(mySavedInstanceState == null) {
 
-            val fragmentTabViewPager2 = FragmentTabViewPager2()
+            val fragmentTabViewPager2 = ViewPager2Fragment()
             val fragmentManager = supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.add(R.id.llFragViewPager2, fragmentTabViewPager2)
@@ -68,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed(runnable2, 2000)
     }
 
-    fun showScene2(){
+    private fun showScene2(){
         val root = layoutInflater.inflate(R.layout.scene_animation, viewGroup, false) as? ViewGroup
         if(root != null) {
             val scene = Scene(viewGroup, root)
@@ -77,8 +96,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getScene2Transition() : Transition {
-        val transitionSet: TransitionSet = TransitionSet()
+    private fun getScene2Transition() : Transition {
+        val transitionSet = TransitionSet()
         // прменяем созданный класс анимации CircularRevealTransition3
         val circularRevealTransition: CircularRevealTransition = CircularRevealTransition()
         circularRevealTransition.addTarget(R.id.cl_scene)
@@ -89,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         return transitionSet
     }
 
-    fun setWindow() {
+    private fun setWindow() {
         val window = window
         // FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS Флаг, указывающий, что это Окно отвечает за отрисовку фона для системных полос.
         // Если установлено, системные панели отображаются с прозрачным фоном, а соответствующие области в этом окне заполняются
@@ -126,7 +145,7 @@ class MainActivity : AppCompatActivity() {
         myAlertDialog() // метод реализации диалога с пользователем закрыть приложение или нет
     }
 
-    fun myAlertDialog() {
+    private fun myAlertDialog() {
         val dialog: Dialog = Dialog(this@MainActivity)
         dialog.setContentView(R.layout.windows_alertdialog)
         dialog.setCancelable(false)

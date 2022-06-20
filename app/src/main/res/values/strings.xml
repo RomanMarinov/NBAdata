@@ -4,4 +4,6 @@
     <string name="title_viewPager2">NBA data for 2019</string>
     <string name="homeTeamAndScore">Home team and score</string>
     <string name="visitorTeamAndScore">Visitor team and score</string>
+
+    <string name="position_nf">n/f</string>
 </resources>
