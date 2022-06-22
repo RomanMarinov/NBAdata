@@ -26,6 +26,8 @@ open class PlayersFragment : Fragment() {
 
     private fun initInterFace(inflater: LayoutInflater, container: ViewGroup?): View{
 
+        container?.let { container.removeAllViewsInLayout() }
+
         val orientation = requireActivity().resources.configuration.orientation
 
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {

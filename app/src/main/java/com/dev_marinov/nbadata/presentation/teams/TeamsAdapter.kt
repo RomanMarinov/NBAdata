@@ -13,10 +13,8 @@ import com.dev_marinov.nbadata.databinding.ItemTeamsBinding
 class TeamsAdapter() : RecyclerView.Adapter<TeamsAdapter.ViewHolder>(){
 
     private var hashMap: HashMap<Int, ObjectListTeams> = HashMap()
-    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
         val inflater = LayoutInflater.from(parent.context)
         val listItemBinding = ItemTeamsBinding.inflate(inflater,parent,false)
         return ViewHolder(listItemBinding)
@@ -42,10 +40,10 @@ class TeamsAdapter() : RecyclerView.Adapter<TeamsAdapter.ViewHolder>(){
 
             binding.teams = objectListTeams
 
-            binding.tvName.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvTeamsCity.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvTeamsConference.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvTeamsDivision.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
+            binding.tvName.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvTeamsCity.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvTeamsConference.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvTeamsDivision.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
 
             binding.executePendingBindings()
         }

@@ -6,4 +6,15 @@
     <string name="visitorTeamAndScore">Visitor team and score</string>
 
     <string name="position_nf">n/f</string>
+
+    <string name="tab_Players">Players</string>
+    <string name="tab_Teams">Teams</string>
+    <string name="tab_Games">Games</string>
+
+    <string name="no">no</string>
+    <string name="yes">yes</string>
+    <string name="exit">Do you wish to exit ?</string>
+
+
+
 </resources>

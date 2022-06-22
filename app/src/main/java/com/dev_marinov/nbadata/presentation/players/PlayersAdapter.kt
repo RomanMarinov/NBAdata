@@ -15,11 +15,8 @@ import com.dev_marinov.nbadata.databinding.ItemPlayersBinding
 class PlayersAdapter() : RecyclerView.Adapter<PlayersAdapter.ViewHolder>(){
 
     private var hashMap: HashMap<Int, ObjectListPlayers> = HashMap()
-    private lateinit var context: Context // только для анимации views
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        context = parent.context
-
         val inflater = LayoutInflater.from(parent.context)
         val listItemBinding = ItemPlayersBinding.inflate(inflater, parent, false)
         return ViewHolder(listItemBinding)
@@ -51,13 +48,13 @@ class PlayersAdapter() : RecyclerView.Adapter<PlayersAdapter.ViewHolder>(){
                 binding.tvPosition.text = objectListPlayers.position
             }
 
-            binding.tvFirstNamePlayers.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvLastNamePlayers.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvNameTeam.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvCity.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvConference.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvDivision.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
-            binding.tvPosition.animation = AnimationUtils.loadAnimation(context, R.anim.scale_up_1) // анимация
+            binding.tvFirstNamePlayers.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvLastNamePlayers.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvNameTeam.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvCity.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvConference.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvDivision.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
+            binding.tvPosition.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
 
             binding.executePendingBindings()
         }

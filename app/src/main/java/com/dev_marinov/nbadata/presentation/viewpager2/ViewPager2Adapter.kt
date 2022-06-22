@@ -1,14 +1,18 @@
 package com.dev_marinov.nbadata.presentation.viewpager2
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class ViewPager2Adapter(requireActivity: FragmentActivity, var fragmentList: ArrayList<Fragment>) : FragmentStateAdapter(requireActivity) {
+class ViewPager2Adapter(
+    requireActivity: FragmentActivity,
+    var fragmentList: ArrayList<Fragment>) : FragmentStateAdapter(requireActivity) {
 
 //    var fragmentList: ArrayList<Fragment> = ArrayList()
 
     override fun createFragment(position: Int): Fragment {
+        Log.e("333","=positionAdapter=" + position)
         return fragmentList[position]
     }
 
