@@ -43,7 +43,6 @@ class ViewPager2Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setAnimation()
-
     }
 
     private fun initInterFace(inflater: LayoutInflater, container: ViewGroup?): View {
