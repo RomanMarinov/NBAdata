@@ -36,7 +36,8 @@ class ViewPager2Fragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?): View {
+        savedInstanceState: Bundle?
+    ): View {
 
         return initInterFace(inflater, container)
     }
@@ -48,49 +49,54 @@ class ViewPager2Fragment : Fragment() {
     }
 
     private fun initInterFace(inflater: LayoutInflater, container: ViewGroup?): View {
-            container?.let { container.removeAllViewsInLayout() }
+        container?.let { container.removeAllViewsInLayout() }
 
-            // получить экран ориентации
-            val orientation = requireActivity().resources.configuration.orientation
-            // раздуть соответствующий макет в зависимости от ориентации экрана
-            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_view_pager2, container, false)
-                START_POS_X = -800F
-                END_POS_X = 800F
-            } else {
-                binding = DataBindingUtil.inflate(inflater, R.layout.fragment_tab_view_pager2, container, false)
-                START_POS_X = -1200F
-                END_POS_X = 1200F
-            }
-
-            setViewPager2Adapter()
-
-            return binding.root
+        // получить экран ориентации
+        val orientation = requireActivity().resources.configuration.orientation
+        // раздуть соответствующий макет в зависимости от ориентации экрана
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            binding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_tab_view_pager2,
+                container,
+                false
+            )
+            START_POS_X = -800F
+            END_POS_X = 800F
+        } else {
+            binding = DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_tab_view_pager2,
+                container,
+                false
+            )
+            START_POS_X = -1200F
+            END_POS_X = 1200F
         }
 
+        setViewPager2Adapter()
+
+        return binding.root
+    }
 
 
-        private fun setViewPager2Adapter() {
+    private fun setViewPager2Adapter() {
 
-            viewPager2ViewModel = ViewModelProvider(this)[ViewPager2ViewModel::class.java]
+        viewPager2ViewModel = ViewModelProvider(this)[ViewPager2ViewModel::class.java]
 
-            val adapterViewPager2 = ViewPager2Adapter(requireActivity(), createListFragments())
-            adapterViewPager2.setData(createListFragments())
-            binding.viewPager2.adapter = adapterViewPager2
+        val adapterViewPager2 = ViewPager2Adapter(requireActivity(), createListFragments())
+        adapterViewPager2.setData(createListFragments())
+        binding.viewPager2.adapter = adapterViewPager2
 
-            // тут надо установить наблюдатель для viewPager2ViewModel.lastTab
-//            viewPager2ViewModel.lastTab.
+        binding.tabLayout.selectTab(binding.tabLayout.getTabAt(viewPager2ViewModel.lastTab))
+        binding.viewPager2.currentItem = viewPager2ViewModel.lastTab
 
-
-            binding.tabLayout.selectTab(binding.tabLayout.getTabAt(viewPager2ViewModel.lastTab))
-            binding.viewPager2.currentItem = viewPager2ViewModel.lastTab
-
-            setTabLayoutMediator(addHeadlinesTab())
-            setViewPager2()
-        }
+        setTabLayoutMediator(addHeadlinesTab())
+        setViewPager2()
+    }
 
     // устанавливаем заголовки для табов
-    private fun addHeadlinesTab() : ArrayList<String>{
+    private fun addHeadlinesTab(): ArrayList<String> {
         val headlinesTab: ArrayList<String> = ArrayList()
         headlinesTab.add(resources.getString(R.string.tab_Players))
         headlinesTab.add(resources.getString(R.string.tab_Teams))
@@ -98,7 +104,7 @@ class ViewPager2Fragment : Fragment() {
         return headlinesTab
     }
 
-    private fun createListFragments() : ArrayList<Fragment> {
+    private fun createListFragments(): ArrayList<Fragment> {
         val fragmentList: ArrayList<Fragment> = ArrayList()
         fragmentList.add(PlayersFragment())
         fragmentList.add(TeamsFragment())
@@ -118,7 +124,11 @@ class ViewPager2Fragment : Fragment() {
         binding.viewPager2.offscreenPageLimit = 3
 
         binding.viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
@@ -127,6 +137,7 @@ class ViewPager2Fragment : Fragment() {
                 Log.e("333", " onPageSelected position$position")
                 super.onPageSelected(position)
             }
+
             override fun onPageScrollStateChanged(state: Int) {
                 //tabLayout.selectTab(tabLayout.getTabAt(viewModelTabViewPager2.lastTab))
                 super.onPageScrollStateChanged(state)
@@ -134,7 +145,7 @@ class ViewPager2Fragment : Fragment() {
         })
     }
 
-    private fun setAnimation(){
+    private fun setAnimation() {
         val animation: Animation = TranslateAnimation(
             START_POS_X!!, END_POS_X!!,
             START_POS_Y, END_POS_Y

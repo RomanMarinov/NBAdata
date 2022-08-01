@@ -37,7 +37,7 @@ class SplashFragment : Fragment() {
         return initInterFace(inflater, container)
     }
 
-    private fun initInterFace(inflater: LayoutInflater, container: ViewGroup?): View{
+    private fun initInterFace(inflater: LayoutInflater, container: ViewGroup?): View {
         container?.let { container.removeAllViewsInLayout() }
 
         val orientation = requireActivity().resources.configuration.orientation
@@ -52,14 +52,14 @@ class SplashFragment : Fragment() {
         return binding.root
     }
 
-    private fun setLayout(){
+    private fun setLayout() {
 
         viewModel = ViewModelProvider(this)[SplashViewModel::class.java]
 
         // при создании макета проверяем статус был ли перед созданием макета открыт диалог
         // если да (true), значит запустим его снова
         if (viewModel.status) {
-           // myAlertDialog()
+            // myAlertDialog()
         }
 
         lifecycleScope.launch(Dispatchers.Main) {
@@ -69,14 +69,18 @@ class SplashFragment : Fragment() {
         }
     }
 
-    private fun showScene1(){
+    private fun showScene1() {
         binding.animationView.playAnimation()
     }
 
-    private suspend fun showScene2(){
+    private suspend fun showScene2() {
         delay(1200)
-        val root = layoutInflater.inflate(R.layout.scene_animation, binding.frameLayout, false) as? ViewGroup
-        if(root != null) {
+        val root = layoutInflater.inflate(
+            R.layout.scene_animation,
+            binding.frameLayout,
+            false
+        ) as? ViewGroup
+        if (root != null) {
             val scene = Scene(binding.frameLayout, root)
             val transition = getScene2Transition()
             TransitionManager.go(scene, transition)
@@ -88,7 +92,7 @@ class SplashFragment : Fragment() {
         findNavController().navigate(R.id.action_splashFragment_to_viewPager2Fragment)
     }
 
-    private fun getScene2Transition() : Transition {
+    private fun getScene2Transition(): Transition {
         val transitionSet = TransitionSet()
         // прменяем созданный класс анимации CircularRevealTransition3
         val circularRevealTransition = CircularRevealTransition()

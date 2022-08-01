@@ -1,6 +1,6 @@
 package com.dev_marinov.nbadata.domain.games
 
-data class Games (
+data class Games(
 
     var date: String,
 

@@ -15,7 +15,8 @@ class CircularRevealTransition : Visibility() {
         sceneRoot: ViewGroup?,
         view: View,
         startValues: TransitionValues?,
-        endValues: TransitionValues?): Animator? {
+        endValues: TransitionValues?
+    ): Animator? {
         val startRadius = 0
         val endRadius = hypot(view.width.toDouble(), view.height.toDouble()).toInt()
         val reveal = ViewAnimationUtils.createCircularReveal(
@@ -39,7 +40,8 @@ class CircularRevealTransition : Visibility() {
         sceneRoot: ViewGroup?,
         view: View,
         startValues: TransitionValues?,
-        endValues: TransitionValues?): Animator? {
+        endValues: TransitionValues?
+    ): Animator? {
         val endRadius = 0
         val startRadius = hypot(view.width.toDouble(), view.height.toDouble()).toInt()
         return ViewAnimationUtils.createCircularReveal(

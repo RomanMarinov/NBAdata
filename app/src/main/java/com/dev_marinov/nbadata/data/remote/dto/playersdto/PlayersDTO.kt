@@ -13,7 +13,7 @@ data class PlayersDTO(
     @SerializedName("team")
     val playersTeamDTO: PlayersTeamDTO
 ) {
-    fun mapToDomain() : Players {
+    fun mapToDomain(): Players {
         return Players(
             firstName = fullName,
             lastName = last_name,

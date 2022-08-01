@@ -1,9 +1,10 @@
 package com.dev_marinov.nbadata.data.remote.dto.teamsdto
 
+import com.dev_marinov.nbadata.domain.teams.Teams
 import com.google.gson.annotations.SerializedName
 
 data class TeamsDTO(
-    @SerializedName("fullName")
+    @SerializedName("full_name")
     val fullName: String,
     @SerializedName("city")
     val city: String,
@@ -11,4 +12,13 @@ data class TeamsDTO(
     val conference: String,
     @SerializedName("division")
     val division: String
-)
+) {
+    fun mapToDomain(): Teams {
+        return Teams(
+            fullName = fullName,
+            city = city,
+            conference = conference,
+            division = division
+        )
+    }
+}

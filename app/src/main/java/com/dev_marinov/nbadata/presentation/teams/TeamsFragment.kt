@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev_marinov.nbadata.R
 import com.dev_marinov.nbadata.databinding.FragmentTeamsBinding
@@ -61,7 +60,7 @@ class TeamsFragment : Fragment() {
         }
 
         viewModelTeamsViewModel.teams.observe(viewLifecycleOwner) { team ->
-            teamsAdapter.refreshTeams(team)
+            teamsAdapter.submitList(team)
         }
     }
 

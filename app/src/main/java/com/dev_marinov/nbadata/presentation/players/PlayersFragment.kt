@@ -62,7 +62,7 @@ open class PlayersFragment : Fragment() {
          }
 
          playersViewModel.players.observe(viewLifecycleOwner) { players ->
-             adapterListPlayers.refreshPlayers(players)
+             adapterListPlayers.submitList(players)
          }
 
      }

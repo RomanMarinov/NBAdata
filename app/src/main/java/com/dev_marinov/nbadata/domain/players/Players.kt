@@ -5,5 +5,4 @@ data class Players(
     var lastName: String,
     var position: String?,
     var team: PlayersTeam,
-
 )

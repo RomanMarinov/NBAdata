@@ -25,7 +25,7 @@ data class GamesDTO(
     @SerializedName("visitor_team_score")
     val scoreVisitor: String
 ) {
-    fun mapToDomain() : Games {
+    fun mapToDomain(): Games {
         return Games(
             date = date,
             gamesHomeTeam = gamesHomeTeam.mapToDomain(),

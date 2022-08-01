@@ -14,5 +14,5 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindNbaRepository(nbaRepository: NbaRepository) :INbaRepository
+    abstract fun bindNbaRepository(nbaRepository: NbaRepository): INbaRepository
 }

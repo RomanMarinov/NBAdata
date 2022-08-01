@@ -11,7 +11,7 @@ data class PlayersTeamDTO(
     @SerializedName("division")
     val division: String
 ) {
-    fun mapToDomain() : PlayersTeam {
+    fun mapToDomain(): PlayersTeam {
         return PlayersTeam(
             city = city,
             conference = conference,

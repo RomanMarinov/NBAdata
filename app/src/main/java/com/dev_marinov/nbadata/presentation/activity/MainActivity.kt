@@ -1,25 +1,14 @@
 package com.dev_marinov.nbadata.presentation.activity
 
-import android.app.Dialog
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.transition.*
-import com.dev_marinov.nbadata.CircularRevealTransition
+import androidx.navigation.findNavController
 import com.dev_marinov.nbadata.R
 import com.dev_marinov.nbadata.databinding.ActivityMainBinding
-import com.dev_marinov.nbadata.databinding.WindowsAlertdialogBinding
-import com.dev_marinov.nbadata.presentation.games.GamesViewModel
-import com.dev_marinov.nbadata.presentation.viewpager2.ViewPager2Fragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -45,40 +34,15 @@ class MainActivity : AppCompatActivity() {
         } else { // иначе
             @Suppress("DEPRECATION")
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            )
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    )
         }
     }
 
-    override fun onBackPressed() {
-        //  если flag false значит работаем с backstack fragment
-        supportFragmentManager.popBackStack() // удаление фрагментов из транзакции
-        myAlertDialog() // метод реализации диалога с пользователем закрыть приложение или нет
+    override fun onBackPressed() = showExitDialog()
+
+    private fun showExitDialog() {
+        bindingActivity.navHostFragment.findNavController()
+            .navigate(R.id.action_viewPager2Fragment_to_exitDialogFragment)
     }
-
-    private fun myAlertDialog() {
-        val bindingDialog: WindowsAlertdialogBinding = DataBindingUtil
-            .inflate(LayoutInflater.from(this), R.layout.windows_alertdialog, null, false)
-
-        val dialog = Dialog(this)
-        dialog.setContentView(bindingDialog.root)
-        dialog.setCancelable(true)
-        dialog.show()
-
-//        // костыль для повторного открытия диалога если перевернули экран
-//        mainActivityViewModel.status = true
-//        dialog.setOnDismissListener {
-//            mainActivityViewModel.status = false
-//        }
-//
-//        bindingDialog.btNo.setOnClickListener {
-//            dialog.dismiss()
-//            dialog.cancel()
-//        }
-//        bindingDialog.btYes.setOnClickListener{
-//            dialog.dismiss()
-//            finish()
-//        }
-    }
-
 }

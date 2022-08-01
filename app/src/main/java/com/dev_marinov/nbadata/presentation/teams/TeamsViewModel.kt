@@ -4,33 +4,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev_marinov.nbadata.domain.Teams
-import com.dev_marinov.nbadata.model.teams.RequestDataTeams
+import com.dev_marinov.nbadata.domain.INbaRepository
+import com.dev_marinov.nbadata.domain.teams.Teams
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.*
+import javax.inject.Inject
 
-class TeamsViewModel : ViewModel() {
+@HiltViewModel
+class TeamsViewModel @Inject constructor(private val iNbaRepository: INbaRepository) : ViewModel() {
 
-    private var _teams: MutableLiveData<HashMap<Int, Teams>> = MutableLiveData()
-    val teams: LiveData<HashMap<Int, Teams>> = _teams
+    private var _teams: MutableLiveData<List<Teams>> = MutableLiveData()
+    val teams: LiveData<List<Teams>> = _teams
 
     init {
-        //getTeams()
+        getTeams()
     }
 
-    private fun getTeams(){
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url("https://free-nba.p.rapidapi.com/teams?page=0")
-            .get()
-            .addHeader("X-RapidAPI-Host", "free-nba.p.rapidapi.com")
-            .addHeader("X-RapidAPI-Key", "3f235a9f12msh754db7d5868e472p168e1djsn3c41eccf8098")
-            .build()
+    private fun getTeams() {
 
         viewModelScope.launch(Dispatchers.IO) {
-            val result = RequestDataTeams.getHashMap(client, request)
-            _teams.postValue(result)
+            val result = iNbaRepository.getTeams()
+            result?.let {
+                _teams.postValue(it)
+            }
         }
     }
 }

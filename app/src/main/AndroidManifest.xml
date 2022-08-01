@@ -14,6 +14,7 @@
         android:theme="@style/Theme.NBAdata">
         <activity
             android:name=".presentation.activity.MainActivity"
+            android:noHistory="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

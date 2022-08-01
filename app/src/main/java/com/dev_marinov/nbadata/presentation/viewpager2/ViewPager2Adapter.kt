@@ -7,12 +7,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ViewPager2Adapter(
     requireActivity: FragmentActivity,
-    var fragmentList: ArrayList<Fragment>) : FragmentStateAdapter(requireActivity) {
-
-//    var fragmentList: ArrayList<Fragment> = ArrayList()
+    var fragmentList: ArrayList<Fragment>
+) : FragmentStateAdapter(requireActivity) {
 
     override fun createFragment(position: Int): Fragment {
-        Log.e("333","=positionAdapter=" + position)
+        Log.e("333", "=positionAdapter=" + position)
         return fragmentList[position]
     }
 

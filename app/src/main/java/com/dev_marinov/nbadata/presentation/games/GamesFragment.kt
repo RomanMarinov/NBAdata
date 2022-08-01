@@ -63,7 +63,7 @@ class GamesFragment : Fragment() {
 
         // подписываем адаптер на изменение списка
         gamesViewModel.games.observe(viewLifecycleOwner) {
-            gamesAdapter.refreshGames(it)
+            gamesAdapter.submitList(it)
         }
 
     }
