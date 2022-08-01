@@ -12,7 +12,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev_marinov.nbadata.R
 import com.dev_marinov.nbadata.databinding.FragmentGamesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GamesFragment : Fragment() {
 
     private lateinit var binding: FragmentGamesBinding
@@ -60,8 +62,8 @@ class GamesFragment : Fragment() {
         }
 
         // подписываем адаптер на изменение списка
-        gamesViewModel.games.observe(viewLifecycleOwner) { games ->
-            gamesAdapter.refreshGames(games)
+        gamesViewModel.games.observe(viewLifecycleOwner) {
+            gamesAdapter.refreshGames(it)
         }
 
     }

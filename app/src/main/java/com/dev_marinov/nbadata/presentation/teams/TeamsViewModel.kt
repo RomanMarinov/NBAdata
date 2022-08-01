@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev_marinov.nbadata.data.ObjectListTeams
+import com.dev_marinov.nbadata.domain.Teams
 import com.dev_marinov.nbadata.model.teams.RequestDataTeams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,11 +12,11 @@ import okhttp3.*
 
 class TeamsViewModel : ViewModel() {
 
-    private var _teams: MutableLiveData<HashMap<Int, ObjectListTeams>> = MutableLiveData()
-    val teams: LiveData<HashMap<Int, ObjectListTeams>> = _teams
+    private var _teams: MutableLiveData<HashMap<Int, Teams>> = MutableLiveData()
+    val teams: LiveData<HashMap<Int, Teams>> = _teams
 
     init {
-        getTeams()
+        //getTeams()
     }
 
     private fun getTeams(){

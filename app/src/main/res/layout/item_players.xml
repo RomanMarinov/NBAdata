@@ -6,7 +6,7 @@
     <data>
         <variable
             name="players"
-            type="com.dev_marinov.nbadata.data.ObjectListPlayers" />
+            type="com.dev_marinov.nbadata.domain.players.Players" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -90,7 +90,7 @@
                     android:id="@+id/tvNameTeam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{players.team}"
+                    android:text="@{players.firstName}"
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/baloo_thambi"
@@ -122,7 +122,7 @@
                     android:id="@+id/tvCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{players.city}"
+                    android:text="@{players.team.city}"
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/baloo_thambi"
@@ -142,7 +142,7 @@
                     android:id="@+id/tvConference"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{players.conference}"
+
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/baloo_thambi"
@@ -171,7 +171,7 @@
                     android:id="@+id/tvDivision"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{players.division}"
+
                     android:textSize="20dp"
                     android:textColor="@color/white"
                     android:fontFamily="@font/baloo_thambi"

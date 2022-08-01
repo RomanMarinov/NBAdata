@@ -1,7 +1,7 @@
 package com.dev_marinov.nbadata.model.teams
 
 import android.util.Log
-import com.dev_marinov.nbadata.data.ObjectListTeams
+import com.dev_marinov.nbadata.domain.Teams
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -11,7 +11,7 @@ import kotlin.coroutines.suspendCoroutine
 
 object RequestDataTeams {
 
-    suspend fun getHashMap(client: OkHttpClient, request: Request): HashMap<Int, ObjectListTeams> {
+    suspend fun getHashMap(client: OkHttpClient, request: Request): HashMap<Int, Teams> {
         return suspendCoroutine { continuation ->
 
             try {
@@ -23,7 +23,7 @@ object RequestDataTeams {
                     @Throws(IOException::class)
                     override fun onResponse(call: Call, response: Response) {
                         //Log.e("333", "-onResponse=" + response.body?.string())
-                            val hashMap: HashMap<Int, ObjectListTeams> = HashMap()
+                            val hashMap: HashMap<Int, Teams> = HashMap()
                         try {
                             val jsonObject = JSONObject(response.body?.string())
                             val k = jsonObject.getJSONArray("data").length()
@@ -35,7 +35,7 @@ object RequestDataTeams {
                                 val conference = jsonObject.getJSONArray("data").getJSONObject(n).getString("conference")
                                 val division = jsonObject.getJSONArray("data").getJSONObject(n).getString("division")
 
-                                hashMap[n] = ObjectListTeams(
+                                hashMap[n] = Teams(
                                     fullName = fullName,
                                     city = city,
                                     conference = conference,

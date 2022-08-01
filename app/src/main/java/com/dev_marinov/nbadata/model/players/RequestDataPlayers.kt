@@ -1,7 +1,7 @@
 package com.dev_marinov.nbadata.model.players
 
 import android.util.Log
-import com.dev_marinov.nbadata.data.ObjectListPlayers
+import com.dev_marinov.nbadata.domain.players.Players
 import okhttp3.*
 import org.json.JSONException
 import org.json.JSONObject
@@ -11,57 +11,57 @@ import kotlin.coroutines.suspendCoroutine
 
 
 object RequestDataPlayers {
-
-    suspend fun getHashMap(client: OkHttpClient, request: Request): HashMap<Int, ObjectListPlayers> {
-        return suspendCoroutine { continuation ->
-
-            client.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    Log.e("333", "-onFailure=")
-                }
-
-                @Throws(IOException::class)
-                override fun onResponse(call: Call, response: Response) {
-                    //Log.e("333", "-onResponse=" + response.body?.string())
-                        val hashMap: HashMap<Int, ObjectListPlayers> = HashMap()
-                    try {
-
-                        val jsonObject = JSONObject(response.body?.string())
-                        val k = jsonObject.getJSONArray("data").length()
-
-                        for (n in 0 until k) {// until значит что n in [1, 10), 10 будет исключён
-
-                            val firstName = jsonObject.getJSONArray("data").getJSONObject(n).getString("first_name")
-                            val lastName = jsonObject.getJSONArray("data").getJSONObject(n).getString("last_name")
-                            val position = jsonObject.getJSONArray("data").getJSONObject(n).getString("position")
-                            val team = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("full_name")
-                            val city = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("city")
-                            val conference = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("conference")
-                            val division = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
-                                .getString("division")
-
-                            hashMap[n] = ObjectListPlayers(
-                                firstName = firstName,
-                                lastName = lastName,
-                                position = position,
-                                team = team,
-                                city = city,
-                                conference = conference,
-                                division = division)
-                        }
-                    }
-                    catch (e: JSONException) {
-                        Log.e("333", "-try catch 1=" + e)
-                    }
-
-                    continuation.resume(hashMap)
-                }
-            })
-        }
-    }
+//
+//    suspend fun getHashMap(client: OkHttpClient, request: Request): HashMap<Int, Players> {
+//        return suspendCoroutine { continuation ->
+//
+//            client.newCall(request).enqueue(object : Callback {
+//                override fun onFailure(call: Call, e: IOException) {
+//                    Log.e("333", "-onFailure=")
+//                }
+//
+//                @Throws(IOException::class)
+//                override fun onResponse(call: Call, response: Response) {
+//                    //Log.e("333", "-onResponse=" + response.body?.string())
+//                        val hashMap: HashMap<Int, Players> = HashMap()
+//                    try {
+//
+//                        val jsonObject = JSONObject(response.body?.string())
+//                        val k = jsonObject.getJSONArray("data").length()
+//
+//                        for (n in 0 until k) {// until значит что n in [1, 10), 10 будет исключён
+//
+//                            val firstName = jsonObject.getJSONArray("data").getJSONObject(n).getString("first_name")
+//                            val lastName = jsonObject.getJSONArray("data").getJSONObject(n).getString("last_name")
+//                            val position = jsonObject.getJSONArray("data").getJSONObject(n).getString("position")
+//                            val team = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
+//                                .getString("full_name")
+//                            val city = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
+//                                .getString("city")
+//                            val conference = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
+//                                .getString("conference")
+//                            val division = jsonObject.getJSONArray("data").getJSONObject(n).getJSONObject("team")
+//                                .getString("division")
+//
+//                            hashMap[n] = Players(
+//                                firstName = firstName,
+//                                lastName = lastName,
+//                                position = position,
+//                                team = team,
+//                                city = city,
+//                                conference = conference,
+//                                division = division)
+//                        }
+//                    }
+//                    catch (e: JSONException) {
+//                        Log.e("333", "-try catch 1=" + e)
+//                    }
+//
+//                    continuation.resume(hashMap)
+//                }
+//            })
+//        }
+//    }
 }
 
 // УДАЛИТЬ ПОСЛЕ ПРОВЕРКИ

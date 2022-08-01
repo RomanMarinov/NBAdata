@@ -18,10 +18,12 @@ import com.dev_marinov.nbadata.CircularRevealTransition
 import com.dev_marinov.nbadata.R
 import com.dev_marinov.nbadata.databinding.FragmentSplashBinding
 import com.dev_marinov.nbadata.presentation.viewpager2.ViewPager2Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
 
     private lateinit var binding: FragmentSplashBinding

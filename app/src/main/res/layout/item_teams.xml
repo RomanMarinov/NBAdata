@@ -6,7 +6,7 @@
     <data>
         <variable
             name="teams"
-            type="com.dev_marinov.nbadata.data.ObjectListTeams" />
+            type="com.dev_marinov.nbadata.domain.Teams" />
     </data>
 
     <androidx.cardview.widget.CardView

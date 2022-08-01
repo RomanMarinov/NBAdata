@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev_marinov.nbadata.R
 import com.dev_marinov.nbadata.databinding.FragmentTeamsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TeamsFragment : Fragment() {
 
     private lateinit var binding: FragmentTeamsBinding

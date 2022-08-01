@@ -16,10 +16,12 @@ import com.dev_marinov.nbadata.databinding.ActivityMainBinding
 import com.dev_marinov.nbadata.databinding.WindowsAlertdialogBinding
 import com.dev_marinov.nbadata.presentation.games.GamesViewModel
 import com.dev_marinov.nbadata.presentation.viewpager2.ViewPager2Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var bindingActivity: ActivityMainBinding

@@ -19,7 +19,9 @@ import com.dev_marinov.nbadata.databinding.FragmentTabViewPager2Binding
 import com.dev_marinov.nbadata.presentation.games.GamesFragment
 import com.dev_marinov.nbadata.presentation.players.PlayersFragment
 import com.dev_marinov.nbadata.presentation.teams.TeamsFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ViewPager2Fragment : Fragment() {
 
     private lateinit var binding: FragmentTabViewPager2Binding

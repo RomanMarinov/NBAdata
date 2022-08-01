@@ -1,6 +1,6 @@
-package com.dev_marinov.nbadata.data
+package com.dev_marinov.nbadata.domain
 
-data class ObjectListTeams (
+data class Teams (
 
     var fullName: String,
     var city: String,

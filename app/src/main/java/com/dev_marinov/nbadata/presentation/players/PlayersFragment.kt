@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev_marinov.nbadata.R
 import com.dev_marinov.nbadata.databinding.FragmentPlayersBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 open class PlayersFragment : Fragment() {
 
     lateinit var binding: FragmentPlayersBinding

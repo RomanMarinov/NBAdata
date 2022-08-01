@@ -1,20 +1,16 @@
 package com.dev_marinov.nbadata.presentation.players
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.annotation.NonNull
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dev_marinov.nbadata.R
-import com.dev_marinov.nbadata.data.ObjectListPlayers
+import com.dev_marinov.nbadata.domain.players.Players
 import com.dev_marinov.nbadata.databinding.ItemPlayersBinding
 
 class PlayersAdapter() : RecyclerView.Adapter<PlayersAdapter.ViewHolder>(){
 
-    private var hashMap: HashMap<Int, ObjectListPlayers> = HashMap()
+    private var players: List<Players> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,29 +19,29 @@ class PlayersAdapter() : RecyclerView.Adapter<PlayersAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(hashMap[position]!!)
+        holder.bind(players[position]!!)
     }
 
     override fun getItemCount(): Int {
-        return hashMap.size
+        return players.size
     }
 
     //передаем данные и оповещаем адаптер о необходимости обновления списка
-    fun refreshPlayers(hashMap: HashMap<Int, ObjectListPlayers>) {
-        this.hashMap = hashMap
+    fun refreshPlayers(players: List<Players>) {
+        this.players = players
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private var binding: ItemPlayersBinding) :RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(objectListPlayers: ObjectListPlayers) {
-            binding.players = objectListPlayers
+        fun bind(players: Players) {
+            binding.players = players
 
             // установка "n/f", если objectListPlayers.position пустой
-            if (objectListPlayers.position == "") {
+            if (players.position == "") {
                 binding.tvPosition.text = "n/f"
             } else {
-                binding.tvPosition.text = objectListPlayers.position
+                binding.tvPosition.text = players.position
             }
 
             binding.tvFirstNamePlayers.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация

@@ -1,21 +1,16 @@
 package com.dev_marinov.nbadata.presentation.games
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.TextView
-import androidx.annotation.NonNull
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dev_marinov.nbadata.R
-import com.dev_marinov.nbadata.data.ObjectListGames
+import com.dev_marinov.nbadata.domain.games.Games
 import com.dev_marinov.nbadata.databinding.ItemGamesBinding
 
 class GamesAdapter() : RecyclerView.Adapter<GamesAdapter.ViewHolder>(){
 
-    private var hashMap: HashMap<Int, ObjectListGames> = HashMap()
+    private var games: List<Games> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -24,16 +19,16 @@ class GamesAdapter() : RecyclerView.Adapter<GamesAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(hashMap[position]!!)
+        holder.bind(games[position]!!)
     }
 
     override fun getItemCount(): Int {
-        return hashMap.size
+        return games.size
     }
 
     //передаем данные и оповещаем адаптер о необходимости обновления списка
-    fun refreshGames(hashMap: HashMap<Int, ObjectListGames>) {
-        this.hashMap = hashMap
+    fun refreshGames(games: List<Games>) {
+        this.games = games
         notifyDataSetChanged()
     }
 
@@ -42,9 +37,9 @@ class GamesAdapter() : RecyclerView.Adapter<GamesAdapter.ViewHolder>(){
         private val binding: ItemGamesBinding,
         ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(objectListGames: ObjectListGames) {
+        fun bind(games: Games) {
 
-            binding.games = objectListGames
+            binding.games = games
 
             // установка анимации
             binding.tvGamesDate.animation = AnimationUtils.loadAnimation(binding.root.context, R.anim.scale_up_1) // анимация
